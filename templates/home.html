@@ -1,0 +1,39 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>GAMING WEBSITE</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css')}}">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<body>
+    <header>
+        <a href="#" class="logo">CONNECT SPORT</a>
+        <ul class="nav">
+            <li><a target="_blank" class="active">Home</a></li>
+            <li><a href="{{url_for('tournament_card')}}">TOURNAMENTS</a></li>
+            <li><a href="{{url_for('postmsg')}}">COMMUNICATION-CENTER</a></li>
+            <li><a href="{{url_for('about')}}">ABOUT</a></li>
+            <li><a href="{{url_for('contact')}}">CONTACT</a></li>
+        </ul>
+        <div class="userlogo">
+            <a href="{{url_for('profiles')}}"><img src="../static/images/user.png"></a>
+        </div>
+    </header>
+    <hr style="color: white;">
+
+
+    <div class="Banner">
+        <div class="bg">
+            <div class="content">
+                <h2>We're Here to</h2>
+                <p>Elevate the standards of tournament management and participation through expert intermediation</p>
+                <a href="#" class="btn">EXPLORE</a>
+                </h2>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

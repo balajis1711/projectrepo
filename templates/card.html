@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <title>Registration Form</title>
+    <style>
+        body {
+            background-image: url('../static/images/67163.jpg');
+            background-size: cover;
+            margin: 0;
+            color: #fff;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 2px solid #00f;
+            border-radius: 5px;
+            background-color: #222;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 20px;
+            border: 2px solid #00f;
+            border-radius: 4px;
+            box-sizing: border-box;
+            background-color: #444;
+            color: #fff;
+        }
+
+        .center-button {
+            text-align: center;
+        }
+
+        input[type="submit"] {
+            background-color: rgba(63, 95, 238, 0.854);
+            color: #000;
+            padding: 14px 28px;
+            border: 2px solid #000;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        input[type="submit"]:hover {
+            background-color: rgba(63, 95, 238, 0.854);
+            color: #fff;
+        }
+
+        body {
+            background-color: rgba(63, 95, 238, 0.854);
+            color: #fff;
+            font-family: Arial, sans-serif;
+        }
+
+        .popup-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .popup-form {
+            max-width: 400px;
+            padding: 20px;
+            border: 2px solid #00f;
+            border-radius: 5px;
+            background-color: #222;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 20px;
+            border: 2px solid #00f;
+            border-radius: 4px;
+            box-sizing: border-box;
+            background-color: #444;
+            color: #fff;
+        }
+
+        .center-button {
+            text-align: center;
+        }
+
+        input[type="submit"] {
+            background-color: rgba(63, 95, 238, 0.854);
+            color: #000;
+            padding: 14px 28px;
+            border: 2px solid #000;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        input[type="submit"]:hover {
+            background-color: rgba(63, 95, 238, 0.854);
+            color: #fff;
+        }
+
+        .navigation {
+            padding: 7px 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f18a1500;
+            transition: 0.5s;
+            z-index: 1000;
+        }
+
+        .navigation .logo {
+            position: relative;
+            color: #fff;
+            text-decoration: none;
+            font-size: 2em;
+            font-weight: 700;
+        }
+
+        .navigation .nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .navigation ul li {
+            list-style: none;
+            margin: 10px;
+        }
+
+        .navigation ul li a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+
+        .navigation ul li a:hover {
+            background: #1aeeef;
+            color: #050e2d;
+            box-shadow: 0 0 10px #ef6f1a17;
+        }
+
+        .navigation .action .searchBx {
+            padding: 5px;
+            margin: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #fff;
+            border-radius: 5px;
+        }
+
+        .navigation .action .searchBx i {
+            font-size: 1.4em;
+            margin: 5px;
+            color: #222;
+        }
+
+        .navigation .action .searchBx input {
+            outline: none;
+            border: none;
+            font-size: 1em;
+            color: #222;
+        }
+
+        /*card styles*/
+        .card-container {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 60px;
+            margin-left: auto;
+            margin-right: auto;
+            flex-wrap: wrap;
+            width: 80%;
+        }
+
+        .card {
+            width: 230px;
+            height: 300px;
+            border: none;
+            border-radius: 10px;
+            background-color: rgba(57, 87, 224, 0.103);
+            /* Change background color to light blue */
+            box-shadow: 0px 0px 10px 1px #000000;
+            font-family: inherit;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            /* Arrange items vertically */
+            justify-content: space-between;
+            /* Distribute items evenly */
+        }
+
+        .card .tournament-name,
+        .card .tournament-date {
+            font-weight: 600;
+            color: white;
+            text-align: center;
+            font-size: 1.3em;
+            margin-bottom: 20px;
+        }
+
+        .card .tournament-date {
+            margin-bottom: 30px;
+            /* Adjusted margin to separate date from button */
+        }
+
+        .card .tournament-name,
+        .card .tournament-date {
+            font-size: medium;
+        }
+
+        .card button {
+            padding: 8px 25px;
+            border-radius: 8px;
+            border: none;
+            background: #e8e8e8;
+            color: #111111;
+            font-weight: 600;
+            margin-bottom: 15%;
+            width: 100%;
+            /* Make the button width 100% of the card */
+        }
+
+        .card:hover {
+            transform: scale(1.1);
+            background: rgba(57, 87, 224, 0.103);
+            border: none;
+            color: #050e2d;
+            box-shadow: 0 0 10px #f7f5f4be;
+        }
+
+        .card button:hover {
+            background: #3c28579f;
+            color: #ffffff;
+        }
+
+        img {
+            margin-left: 200px;
+        }
+
+        .back-button {
+            padding: 8px 25px;
+            border-radius: 8px;
+            border: none;
+            background: #fb0202;
+            color: #ffffff;
+            font-weight: 600;
+            margin-bottom: 15%;
+            width: 100%;
+            margin-left: 85%;
+            text-decoration: none;
+        }
+
+        .flash-messages {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .flash-messages li {
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1 style="text-align: center;">Welcome to our Tournaments</h1>
+        <a href="{{url_for('home')}}" class="back-button">Back</a>
+    </div>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <ul class="flash-messages">
+        {% for category, message in messages %}
+        <li class="{{ category }}">
+            {{ message }}
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+
+    <div class="popup-container" id="popupContainer">
+        <div class="popup-form">
+            <form id="registrationForm" action="{{url_for('playerinfo')}}" method="post">
+                <label for="teamName">Team Name:</label>
+                <input type="text" id="teamName" name="teamName" required>
+
+                <label for="yourName">Your Name:</label>
+                <input type="text" id="yourName" name="yourName" required>
+
+                <label for="address">Address:</label>
+                <input type="text" id="address" name="address" required>
+
+                <input type="hidden" id="tournamentId" name="tournamentId">
+                <input type="hidden" id="entryFee" name="entryFee">
+
+                <div class="center-button">
+                    <button type="submit" id="payButton">Pay & Register</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    {% for chunk in tournaments|batch(4) %}
+    <div class="card-container">
+        {% for tournament in chunk %}
+        <div class="card">
+            <h1 class="tournament-name">NAME :{{ tournament[2] }}</h1>
+            <h1 class="tournament-name">GAME :{{ tournament[4] }}</h1>
+            <h1 class="tournament-date">REG-ENDDATE :{{ tournament[6] }}</h1>
+            <h1 class="tournament-date">MATCH-DATE :{{ tournament[7] }}</h1>
+            <h1 class="tournament-date">ENTRY-FEE :{{ tournament[9] }}</h1>
+            <button type="submit" onclick="url_for('playerinfo')" class="register-btn"
+                data-tournament-id="{{ tournament[0] }}" data-entry-fee="{{ tournament[9] }}">Register Now</button>
+        </div>
+        {% endfor %}
+    </div>
+    {% endfor %}
+
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var popupContainer = document.getElementById('popupContainer');
+            var registerBtns = document.getElementsByClassName("register-btn");
+
+            console.log("Register buttons found:", registerBtns.length);
+
+            for (var i = 0; i < registerBtns.length; i++) {
+                registerBtns[i].addEventListener('click', function () {
+                    console.log("Register button clicked");
+                    var tournamentId = this.getAttribute("data-tournament-id");
+                    var entryFee = this.getAttribute("data-entry-fee");
+                    popupContainer.style.display = "flex";
+                    document.getElementById('tournamentId').value = tournamentId;
+                    document.getElementById('entryFee').value = entryFee;
+                });
+            }
+        });
+        window.onclick = function (event) {
+            if (event.target == popupContainer) {
+                popupContainer.style.display = "none";
+            }
+        }
+
+        document.getElementById('payButton').onclick = function () {
+            var teamName = document.getElementById('teamName').value;
+            var yourName = document.getElementById('yourName').value;
+            var address = document.getElementById('address').value;
+            var tournamentId = document.getElementById('tournamentId').value;
+            var entryFee = document.getElementById('entryFee').value;
+
+            var options = {
+                "key": "rzp_test_dYStpQwu6bs3hh",
+                "amount": entryFee * 100,
+                "currency": "INR",
+                "name": "Your Company Name",
+                "description": "Tournament Registration Fee",
+                "handler": function (response) {
+                    alert("Payment successful: " + response.razorpay_payment_id);
+                    document.getElementById('registrationForm').submit();
+                },
+                "prefill": {
+                    "name": yourName,
+                    "email": "connectsport18@gmail.com",
+                    "contact": "9500797305"
+                }
+            };
+
+            var rzp = new Razorpay(options);
+            rzp.open();
+        };
+    </script>
+</body>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Player Profile</title>
+    
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-image: url(../static/images/profilebg.jpg);
+            background-size: cover;
+            color: #fff;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0);
+        }
+        .logo {
+            color: #fff;
+            text-decoration: none;
+            font-size: 2em;
+            font-weight: bold;
+        }
+        .nav {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            margin-left: auto;
+        }
+        .nav li {
+            margin: 0 10px;
+        }
+        .nav a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .nav a:hover {
+            background-color: rgba(121, 34, 34, 0.767);
+        }
+        .action {
+            margin-left: auto;
+        }
+        .btn {
+            padding: 8px 16px;
+            background-color: red;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-family: 'Lucida Sans';
+        }
+        .btn:hover {
+            background-color: #ff7f00;
+        }
+        .profile {
+            display: flex;
+            align-items: center;
+            margin: 50px;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0);
+            border-radius: 10px;
+        }
+        .profile h2 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .profile-info {
+            margin-left: 20px;
+        }
+        .profile-info p {
+            margin: 5px 0;
+            font-size: 18px;
+        }
+        .profile-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 70px;
+            perspective: 1000px; /* Added perspective for 3D effect */
+            transition: transform 0.3s ease-in-out; 
+        }
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .profile-image:hover {
+            transform: scale(1.1) rotateY(180deg);
+        }
+        .profile-image:not(:hover) {
+            transform: rotateY(0deg);
+        }
+        .twobts {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+            margin-bottom: 180px;
+        }
+        .twobts a {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="#" class="logo">Connect$ports</a>
+        <ul class="nav">
+            <li><a href="{{url_for('home')}}">Home</a></li>
+            <li><a href="{{url_for('about')}}">About</a></li>
+            <li><a href="{{url_for('postmsg')}}">Communication-center</a></li>
+            <li><a href="{{url_for('tournament_card')}}">Tournaments</a></li>
+            <li><a href="{{url_for('contact')}}">Contacts</a></li>
+        </ul>
+        <div class="action">
+            <a href="{{url_for('logout')}}"><button class="btn">Logout</button></a>
+        </div>
+    </header>
+    <div class="profile">
+        <div class="profile-image">
+            <img src="../static/images/user.png" alt="Profile Image">
+        </div>
+        <div class="profile-info">
+            <h2>Profile Information</h2>
+            <p>userid: {{ user_details[0] }}</p>
+            <p>role: {{ user_details[3] }}</p>
+            <p>name:{{ user_details[2] }}</p>
+            <p>Email: {{ user_details[1] }}</p>
+            <p>Phone: {{ user_details[4] }}</p>
+        </div>
+    </div>
+    <div class="twobts">
+        <a href="{{url_for('ply_tournaments')}}" class="btn">View Tournaments</a>
+    </div>
+</body>
+</html>

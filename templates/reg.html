@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Registration Form</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='regi.css') }}">
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="form-title">Registration</h1>
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flash-messages">
+                {% for category, message in messages %}
+                    <div class="flash-message {{ category }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+      {% endwith %} 
+      <script type="text/javascript" src="{{ url_for('static', filename='script.js') }}">
+      </script>
+      <form action="{{ url_for('registration') }}" method="post">
+        <div class="main-user-info">
+          <div class="user-input-box">
+            <label for="fullName">Username</label>
+            <input type="text" id="uname" name="uname"/>
+          </div>
+          <div class="user-input-box">
+            <label for="username">Userid</label>
+            <input type="text" id="userid"name="userid"/>
+          </div>
+          <div class="user-input-box">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email"/>
+          </div>
+          <div class="user-input-box">
+            <label for="phoneNumber">Phone Number</label>
+            <input type="text" id="phnum"name="phnum"/>
+          </div>
+          <div class="user-input-box">
+            <label for="password">Password</label>
+            <input type="password"id="passw"name="passw"/>
+          </div>
+          <div class="user-input-box">
+            <label for="confirmPassword">Confirm Password</label>
+            <input type="password" id="confirmPassword" name="confirmPassword"/>
+          </div>
+          <div class="gender-details-box">
+            <span class="gender-title">Role</span>
+            <div class="gender-category">
+              <input type="radio" name="role" id="tcc" value="tcc">
+              <label for="tcc">Tournament-Conductors</label><br>
+              <input type="radio" name="role" id="play" value="play"/>
+              <label for="play">Player</label>
+            </div>
+          </div>
+          </div>
+        <div class="form-submit-btn">
+          <input type="submit" value="Register">
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

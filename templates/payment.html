@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Page</title>
+</head>
+<body>
+    <h1>Payment Details</h1>
+
+    <div id="razorpay-container">
+    </div>
+
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script>
+        var amount = "{{ amount }}";  
+        var razorpayOrderId = "{{ razorpay_order_id }}";  
+        var razorpayKey = "rzp_test_dYStpQwu6bs3hh";  
+
+        var options = {
+            "key": razorpayKey,
+            "amount": amount,
+            "currency": "INR",
+            "name": "Your Website Name",
+            "description": "Tournament Entry Fee",
+            "order_id": razorpayOrderId,
+            "handler": function(response) {
+                alert('Payment successful!');
+                window.location.href = '/payment/success';
+            },
+            "prefill": {
+                "name": "Your Name",
+                "email": "your_email@example.com",
+                "contact": "your_contact_number"
+            },
+            "theme": {
+                "color": "#3399cc"
+            }
+        };
+
+        var rzp = new Razorpay(options);
+        rzp.open();
+    </script>
+</body>
+</html>

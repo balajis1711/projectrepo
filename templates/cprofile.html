@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='profilestyle.css')}}">
+    <title>Tournament Profile</title>
+    
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-image: url(../static/images/profilebg.jpg);
+            color: #fff;
+            background-size: cover;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0);
+        }
+        .logo {
+            color: #fff;
+            text-decoration: none;
+            font-size: 2em;
+            font-weight: bold;
+        }
+        .nav {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            margin-left: auto;
+        }
+        .nav li {
+            margin: 0 10px;
+        }
+        .nav a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .nav a:hover {
+            background-color: rgba(255, 255, 255, 0.767);
+        }
+        .action {
+            margin-left: auto;
+        }
+        .btn {
+            padding: 8px 16px;
+            background-color: red;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-family: 'Lucida Sans';
+            
+        }
+        .btn:hover {
+            background-color: #ff7f00;
+        }
+        .profile {
+            display: flex;
+            align-items: center;
+            margin: 50px;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0);
+            border-radius: 10px;
+        }
+        .profile h2 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .profile-info {
+            margin-left: 20px;
+        }
+        .profile-info p {
+            margin: 5px 0;
+            font-size: 18px;
+        }
+        .profile-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 70px;
+            perspective: 1000px; /* Added perspective for 3D effect */
+            transition: transform 0.3s ease-in-out; 
+        }
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .profile-image:hover {
+            transform: scale(1.1) rotateY(180deg); /* Scale up and flip the image on hover */
+        }
+        .profile-image:not(:hover) {
+            transform: rotateY(0deg); /* Return the image to its original state when not hovered over */
+        }
+        .twobts {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+            margin-bottom: 180px;
+        }
+        .twobts a {
+            text-decoration: none;
+        }
+        .modal {
+                    display: none; 
+                    position: fixed; 
+                    z-index: 1; 
+                    left: 0;
+                    top: 0;
+                    width: 100%; 
+                    height: 100%; 
+                    overflow: auto;
+                    background-color: rgba(0,0,0,0.4); 
+                }
+
+                .modal-content {
+                    background-image: url(../static/images/tcbg.jpg);
+                    background-size: cover;
+                    background-repeat: no-repeat;
+                    background-position: center;
+                    margin: 4% auto; 
+                    padding: 20px;
+                    border: 5px solid #ffffff;
+                    width: 80%;
+                    border-radius: 10px;
+                }
+
+                .close {
+                    color: #aaa;
+                    float: right;
+                    font-size: 28px;
+                    font-weight: bold;
+                }
+
+                .close:hover,
+                .close:focus {
+                    color: rgb(255, 56, 56);
+                    text-decoration: none;
+                    cursor: pointer;
+                }
+    .flash-messages {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .flash-messages li {
+        padding: 3%;
+        margin-bottom: 5%;
+        margin-left:40%;
+        color: #fff; 
+    }
+
+    .success {
+        background:transparent;
+        color: #ffffff;
+    }
+
+    .error {
+        background:transparent;
+        color: #ffffff;
+    }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="#" class="logo">Connect$ports</a>
+        <ul class="nav">
+            <li><a href="{{url_for('home')}}">Home</a></li>
+            <li><a href="{{url_for('about')}}">About</a></li>
+            <li><a href="{{url_for('postmsg')}}">Communication-center</a></li>
+            <li><a href="{{url_for('tournament_card')}}">Tournaments</a></li>
+            <li><a href="{{url_for('contact')}}">Contacts</a></li>
+        </ul>
+        <div class="action">
+            <a href="{{url_for('logout')}}"><button class="btn">Logout</button></a>
+        </div>
+    </header>
+    <div class="flash-messages">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul>
+                    {% for category, message in messages %}
+                        <li class="{{ category }}">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+    </div>
+    <div class="profile">
+        <div class="profile-image">
+            <img src="../static/images/user.png" alt="Profile Image">
+        </div>
+        <div class="profile-info">
+            <h2>Profile Information</h2>
+            <p>userid: {{ user_details[0] }}</p>
+            <p>role: {{ user_details[3] }}</p>
+            <p>name:{{ user_details[2] }}</p>
+            <p>Email: {{ user_details[1] }}</p>
+            <p>Phone: {{ user_details[4] }}</p>
+        </div>
+    </div>
+    <div class="twobts">
+        <a href="#" class="btn" onclick="openModal()">Conduct Tournament</a>
+        <a href="{{url_for('view_conducted')}}" class="btn">View Tournaments</a>
+    </div>
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+          <span class="close" onclick="closeModal()">&times;</span>
+        <div class="containerfo">
+            <h1 class="form-title">CONDUCT TOURNAMENT</h1>
+                <form action="/create_tournament" id="tournamentRegistrationForm" method="post">
+                    <div class="main-user-info">
+                        <div class="user-input-box">
+                             <label for="fullName">Tournament Name</label>
+                            <input type="text" id="tname" name="tname"/>
+                         </div>
+                    <div class="user-input-box">
+                        <label for="category">Category:</label>
+                        <select id="category" name="category" required>
+                        <option value="indoor">INDOOR</option>
+                         <option value="outdoor">OUTDOOR</option>
+                     </select>
+                    </div>
+                    <div class="user-input-box">
+                        <label for="gameName">Game Name:</label>
+                        <select id="gameName" name="gameName" required></select>
+                    </div>
+                        <div class="user-input-box">
+                        <label for="agelimit">AGE LIMIT</label>
+                        <select id="agelimit" name="agelimit" required>
+                            <option value="18">UNDER 18</option>
+                            <option value="21">18 - 21</option>
+                            <option value="25">21 - 25</option>
+                            <option value="31">26 - 31</option>
+                        </select>
+                        </div>
+                        <div class="user-input-box">
+                        <label for="password">Registration End date</label>
+                        <input type="date" id="rd"name="rd"/>
+                        </div>
+                        <div class="user-input-box">
+                        <label for="password">Match date</label>
+                        <input type="date" id="td"name="td"/>
+                        </div>
+                        <div class="user-input-box">
+                        <label for="confirmPassword">Location</label>
+                        <input type="text" id="location" name="location"/>
+                        </div>
+                        <div class="user-input-box">
+                        <label for="confirmPassword">Entry Fee</label>
+                        <input type="text" id="efee" name="efee"/>
+                        </div>
+                    <div class="gender-details-box">
+                        <span class="gender-title">Gender</span>
+                        <div class="gender-category">
+                        <input type="radio" name="gender" id="male" value="male">
+                        <label for="male">Male</label><br>
+                        <input type="radio" name="gender" id="female" value="female"/>
+                        <label for="female">Female</label><br>
+                        <input type="radio" name="gender" id="neutral" value="neutral"/>
+                        <label for="female">Both can Participate</label>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="form-submit-btn">
+                        <input type="submit" value="Register">
+                    </div>
+                    </form>
+        </div>
+     </div>
+     </div>
+    
+    <script>
+        var modal = document.getElementById("myModal");
+        var btn = document.querySelector(".conduct-tournament");
+        var span = document.getElementsByClassName("close")[0];
+        function openModal() {
+          modal.style.display = "block";
+        }
+        function closeModal() {
+          modal.style.display = "none";
+        }
+        window.onclick = function(event) {
+          if (event.target == modal) {
+            modal.style.display = "none";
+          }
+        }
+        var indoorGames = ["Chess", "Badminton", "Table Tennis","carrom","volleyball","kabbadi","squash","weight-lifting","BasketBall","HandBall","Shooting","kho-kho","Tennikoit"];
+        var outdoorGames = ["Football", "Cricket", "Tennis","volleyball","BaseBall","Hockey","Athletics","kabbadi","Rugby","Kho-Kho","Golf"];
+        var categoryDropdown = document.getElementById('category');
+        var gameNameDropdown = document.getElementById('gameName');
+        categoryDropdown.addEventListener('change', function () {
+                    updateGameOptions();
+                });
+        function updateGameOptions() {
+            gameNameDropdown.innerHTML = ''; // Clear previous options
+            var selectedCategory = categoryDropdown.value;
+            var games = (selectedCategory === 'indoor') ? indoorGames : outdoorGames;
+            games.forEach(function (game) {
+                var option = document.createElement('option');
+                option.value = game;
+                option.text = game;
+                gameNameDropdown.add(option);
+            });
+            }
+            setTimeout(function() {
+        var flashMessages = document.querySelectorAll('.flash-messages li');
+        flashMessages.forEach(function(message) {
+            message.style.display = 'none';
+        });
+    }, 5000); 
+        </script>
+</body>
+</html>

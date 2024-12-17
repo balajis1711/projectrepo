@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            body{
+                background-image: url(../static/images/mbg.jpg);
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: cover;
+            }
+            h2{
+                font-size: 45px;
+                font-family: Gill Sans MT;
+                text-align: center;
+                color: white;
+            }
+            form
+            {
+                margin-top: 3%;
+                color:rgb(255, 255, 255);
+                font-size: 40px;
+                font-family: Comic sans MS;
+            }
+            .frmcls{
+                margin-left: 40%;
+                margin-top:3%;
+            }
+            textarea{
+                width: 30%;
+            }
+            .bn{
+                margin-left: 10%;
+                background-color: antiquewhite;
+                font-size: 28px;
+            }
+            .navbar {
+                background: transparent;
+                overflow: hidden;
+            }
+
+                .navbar ul {
+                    list-style-type: none;
+                    margin: 0;
+                    padding: 0;
+                    overflow: hidden;
+                }
+
+                .navbar li {
+                    float: right;
+                }
+
+                .navbar li a {
+                    display: block;
+                    color: rgb(255, 255, 255);
+                    text-align: center;
+                    padding: 14px 16px;
+                    text-decoration: none;
+                }
+
+                .navbar li a:hover {
+                    background-color: #000000;
+                    color: rgb(255, 255, 255);
+                }
+
+                .active{
+                    color:white;
+                    background-color: black;
+                }
+        </style>
+    </head>
+    <body>
+        <nav class="navbar">
+            <ul>
+                <li><a href="{{url_for('home')}}">Home</a></li>
+                <li><a class="active" href="#">Post</a></li>
+                <li ><a href="{{url_for('postmsg')}}">View Messages</a></li>
+            </ul>
+        </nav>
+        <h2>POST SOMETHING</h2>
+        {% with messages = get_flashed_messages(category_filter=['post_success']) %}
+        {% if messages %}
+            <div class="flash-messages">
+                {% for message in messages %}
+                    <div class="flash-message">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+    
+    {% block content %}
+    {% endblock %}
+        <div class="frmcls">
+        <form action="{{ url_for('message')}}" method="post">
+            <label style="color: white;"><u>WRITE HERE...!</u></label><br><br>
+            <textarea id="content" name="content" rows="5" required></textarea><br>
+            <button type="submit" class="bn">Post</button>
+        </form>
+    </div>
+    </body>
+</html>

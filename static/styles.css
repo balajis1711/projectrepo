@@ -1,0 +1,67 @@
+
+
+.navbar {
+    background: transparent;
+    overflow: hidden;
+}
+
+.navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.navbar li {
+    float: right;
+}
+
+.navbar li a {
+    display: block;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.navbar li a:hover {
+    background-color: #000000;
+    color: rgb(255, 255, 255);
+}
+
+.active{
+    color:white;
+    background-color: black;
+}
+
+.message-container {
+    width: 80%; 
+    margin: 0 auto;
+    margin-top: 5%;
+}
+
+body{
+    background-color:rgb(121, 118, 183);
+}
+.message {
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+h2{
+    font-size: 28px;
+    font-family: Gill Sans MT;
+    text-align: center;
+}
+
+.username {
+    font-weight: bold;
+    color: #333;
+}
+
+.content {
+    color: #666;
+}

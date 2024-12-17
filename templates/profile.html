@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<title>User Profile</title>
+<link rel="stylesheet" href="{{url_for('static', filename='profilestyle.css')}}">
+<style>
+
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4); 
+}
+
+.modal-content {
+    background-image: url(../static/images/tcbg.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin: 4% auto; 
+    padding: 20px;
+    border: 5px solid #ffffff;
+    width: 80%;
+    border-radius: 10px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: rgb(255, 56, 56);
+    text-decoration: none;
+    cursor: pointer;
+}
+</style>
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <div class="logo">
+            Connect Sport
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Tournaments</a></li>
+                <li><a href="#">Communication Center</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+        <a href="{{url_for('logout')}}" class="logout-btn">Logout</a>
+    </div>
+</header>
+
+<div class="containerpfl">
+    <div class="profile-card">
+        <div class="profile-header">
+            <img src="../static/images/user.png" alt="Profile Picture" class="profile-picture">
+            <div class="profile-details">
+                <h1>userid: {{ user_details[0] }}</h1>
+                <h1>role: {{ user_details[3] }}</h1>
+                <h1>name:{{ user_details[2] }}</h1>
+                <h1>Contact Information</h1>
+                <h1>Email: {{ user_details[1] }}</h1>
+                <h1>Phone: {{ user_details[4] }}</h1>
+            </div>
+        </div>
+        <div class="options-container">
+        <a href="#" class="conduct-tournament" onclick="openModal()">
+            <i style="font-size:50px" class="fa">&#xf0fe;</i><br>
+            <span style="text-align:left">Conduct Tournament</span>
+        </a>
+        <a href="#" class="view-tournaments">
+            <i style="font-size:50px" class="fa">&#xf06e;</i><br>
+            <span style="text-align:left">View Tournaments</span>
+        </a>
+        </div>
+    </div>
+</div>
+<div id="myModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+    <div class="containerfo">
+        <h1 class="form-title">CONDUCT TOURNAMENT</h1>
+            <form action="/create_tournament" id="tournamentRegistrationForm" method="post">
+                <div class="main-user-info">
+                    <div class="user-input-box">
+                         <label for="fullName">Tournament Name</label>
+                        <input type="text" id="tname" name="tname"/>
+                     </div>
+                <div class="user-input-box">
+                    <label for="category">Category:</label>
+                    <select id="category" name="category" required>
+                    <option value="indoor">INDOOR</option>
+                     <option value="outdoor">OUTDOOR</option>
+                 </select>
+                </div>
+                <div class="user-input-box">
+                    <label for="gameName">Game Name:</label>
+                    <select id="gameName" name="gameName" required></select>
+                </div>
+                    <div class="user-input-box">
+                    <label for="agelimit">AGE LIMIT</label>
+                    <select id="agelimit" name="agelimit" required>
+                        <option value="18">UNDER 18</option>
+                        <option value="21">18 - 21</option>
+                        <option value="25">21 - 25</option>
+                        <option value="31">26 - 31</option>
+                    </select>
+                    </div>
+                    <div class="user-input-box">
+                    <label for="password">Registration End date</label>
+                    <input type="date" id="rd"name="rd"/>
+                    </div>
+                    <div class="user-input-box">
+                    <label for="password">Match date</label>
+                    <input type="date" id="td"name="td"/>
+                    </div>
+                    <div class="user-input-box">
+                    <label for="confirmPassword">Location</label>
+                    <input type="text" id="location" name="location"/>
+                    </div>
+                    <div class="user-input-box">
+                    <label for="confirmPassword">Entry Fee</label>
+                    <input type="text" id="efee" name="efee"/>
+                    </div>
+                <div class="gender-details-box">
+                    <span class="gender-title">Gender</span>
+                    <div class="gender-category">
+                    <input type="radio" name="gender" id="male">
+                    <label for="male">Male</label><br>
+                    <input type="radio" name="gender" id="female"/>
+                    <label for="female">Female</label><br>
+                    <input type="radio" name="gender" id="neutral"/>
+                    <label for="female">Both can Participate</label>
+                    </div>
+                </div>
+                </div>
+                <div class="form-submit-btn">
+                    <input type="submit" value="Register">
+                </div>
+                </form>
+    </div>
+ </div>
+ </div>
+
+<script>
+
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.querySelector(".conduct-tournament");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+function openModal() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+function closeModal() {
+  modal.style.display = "none";
+}
+
+
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+var indoorGames = ["Chess", "Badminton", "Table Tennis"];
+        var outdoorGames = ["Football", "Cricket", "Tennis"];
+    
+        var categoryDropdown = document.getElementById('category');
+        var gameNameDropdown = document.getElementById('gameName');
+    
+        categoryDropdown.addEventListener('change', function () {
+            updateGameOptions();
+        });
+    
+        function updateGameOptions() {
+            gameNameDropdown.innerHTML = ''; // Clear previous options
+    
+            var selectedCategory = categoryDropdown.value;
+            var games = (selectedCategory === 'indoor') ? indoorGames : outdoorGames;
+    
+            games.forEach(function (game) {
+                var option = document.createElement('option');
+                option.value = game;
+                option.text = game;
+                gameNameDropdown.add(option);
+            });
+        }
+    
+        /*document.getElementById('tournamentRegistrationForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+    
+            // Handle form submission logic here
+            var formData = new FormData(event.target);
+            var formDataObject = {};
+            formData.forEach(function (value, key) {
+                formDataObject[key] = value;
+            });
+    
+            console.log(formDataObject);
+    
+            // Replace the alert with your specific logic (e.g., sending data to a server)
+            alert("Form submitted!\n\n" + JSON.stringify(formDataObject, null, 2));
+        });
+    
+        //document.getElementById('posterUpload').addEventListener('change', function (event) {
+            //var preview = document.getElementById('posterPreview');
+            //preview.src = URL.createObjectURL(event.target.files[0]);
+        //});
+    
+        // Initial update of game options based on the default category
+        updateGameOptions();*/
+</script>
+
+</body>
+</html>
+
+
+

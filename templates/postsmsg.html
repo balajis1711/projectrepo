@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Messages</title>
+    <link rel="stylesheet" href="{{ url_for('static' ,filename='styles.css' )}}">
+</head>
+<body>
+    <nav class="navbar">
+        <ul>
+            <li><a href="{{url_for('home')}}">Home</a></li>
+            <li><a href="{{url_for('message')}}">Post</a></li>
+            <li ><a class="active" href="#" >View Messages</a></li>
+        </ul>
+    </nav>
+    <hr>
+    <h2>COMMUNICATION CENTER</h2>
+    <div class="message-container">
+        {% for ms in mesgs %}
+        <div class="message">
+            <span class="username">Username :{{ ms[0] }}</span>
+            <span class="content">Message :{{ ms[1] }}</span>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
+

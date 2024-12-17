@@ -1,0 +1,97 @@
+<html>
+    <head>
+        <title>About Us</title>
+        <style>
+            body{
+                background-image: url('../static/images/aboutbg.jpg');
+                background-size: cover;
+            }
+            header{
+    padding: 7px 2px; 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f18a1500;
+    z-index: 1000;
+}
+header .logo
+{
+    margin-left: 80px;
+    position: relative;
+    color: #fff;
+    text-decoration: none;
+    font-size: 2em;
+    font-weight: 700;
+}
+header .nav
+{
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+header ul li{
+    list-style: none;
+    margin: 10px;
+}
+header ul li a{
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+header ul li a:hover{
+    background: #f6f8f5;
+    color: #050e2d;
+    box-shadow: 0 0 10px #ef6f1a17;
+}
+.About{
+    margin-top: 100px;;
+    margin-left: 50px;
+}
+.About h2{
+    position: relative;
+    color: #fff;
+    text-decoration: none;
+    font-size: 2em;
+    font-weight: 200;  
+}
+.About p{
+    font-size: 1.5em;
+    color: rgb(247, 247, 247);
+}
+img{
+    margin-left: 250px;
+    
+}
+        </style>
+    </head>
+    <body>
+        <header>
+            <a href="#" class="logo" style="font-family: Berlin Sans FB;">CONNECTSPORT</a>
+            <ul class="nav">
+                <li><a href="{{url_for('home')}}" target="_blank">Home</a></li>
+                <li><a href="{{url_for('message')}}" target="_blank">Communication-center</a></li>
+                <li><a href="{{url_for('tournament_card')}}" target="_blank">Tournaments</a></li>
+                <li><a href="{{url_for('contact')}}" target="_blank">Contacts</a></li>
+            </ul>
+        </header>
+        
+        <div class="About">
+            <h2>Welcome To connectsports</h2>
+            <p><b>ConnectSports, we are passionate about revolutionizing the way sports events are organized and enjoyed. <br>
+                With a dedicated team of sports enthusiasts and technology experts, <br>
+                we strive to create a seamless platform that connects tournament organizers and players alike.<br></p>
+                <p>
+                Our mission is to foster a vibrant and inclusive community where sports lovers can come together, <br>
+                compete, and celebrate their shared passion. Whether you're a seasoned athlete or a casual player, <br>
+                ConnectSports offers a range of features designed to enhance your sports experience.</b></p>
+                <p><b>
+                    From real-time event monitoring to intuitive registration processes, <br>ConnectSports is committed to providing a user-friendly platform <br>that brings the thrill of sports events right to your fingertips.
+
+                    Join us in our journey to redefine the world of sports.<br> Let's connect, compete, and create unforgettable moments together</b>
+                </p>
+        </div>
+       
+    </body>
+</html>
