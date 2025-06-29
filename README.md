@@ -8,9 +8,8 @@ This repository contains mini projects, presentations, and documentation related
   - Tech stack: Flask, HTML, CSS, JavaScript, MySQL
   - Purpose: Automates the intermediate process between tournament conductors and players.
   - Files:
-    - `ConnectSport_Presentation.pptx` – Overview of the project and features.
-    - `webdevelopment.pptx` – A short seminar I presented on the basics of web development.
-    - `seminar.ppt` – [Add what this file is about]
+    - `zerothreview.pptx` – Overview of the project and features.
+    - 50%review - Entire Project
 
 ## 🧠 About Me
 
